@@ -1,0 +1,32 @@
+spring:
+  jpa:
+    show-sql: true
+esig:
+  jwt:
+    secretKey: AE576823DAAD3D041139D463FDF3173538CF6688EB6D1964BF2CE9637F93EDE4
+    ttl: 2592000000
+  mcomm:
+    url: https://testes-mcomm.esig.com.br/
+    
+  app:
+     key: quarkedu-crm-teste-key
+  core:
+     url: https://testes-mcore.esig.com.br
+  solis:
+     url: https://testes-solis2.esig.com.br
+  tfs:
+     mfiles:
+        url: https://testes-mfiles.esig.com.br
+        dskey: dskey-quarkedu
+  mq:
+     url: amqp://desenv:desenv@testes-quarks.esig.com.br:5672/dev
+     defaultSolisConsumer:
+        enabled: false
+  jobs:
+     habilitado: false
+     
+  cors:
+     allowedOrigins: https://testes-agenda-quarkedu.esig.com.br,http://localhost:4200     
+   
+project:
+  swagger: true

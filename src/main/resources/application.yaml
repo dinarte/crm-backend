@@ -1,0 +1,49 @@
+esig:
+  app:
+     codigo: quarkedu-crm
+  core:
+     url: https://mcore.esig.com.br
+  solis:
+    url: https://solis2.esig.com.br
+  datasource:
+    app:
+      jndiName: eduCrmDS
+  tfs:
+    provider: mfiles
+    mfiles:
+      url: https://mfiles.esig.com.br
+      dskey: blank-por-enquanto-nao-usa
+  audit:
+     enabled: true
+     provider: mlog
+  jobs:
+    habilitado: false
+  sso:
+    url_ignorar: /
+  web:
+     jsf:
+        habilitado: false
+     filtros:
+        sso:
+           habilitado: false
+        erro:
+           habilitado: false 
+        view: 
+           habilitado: false
+
+spring:   
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+  resources:
+    static-locations: "classpath:/static/"
+
+  jackson:
+    time-zone: "Brazil/East"
+    locale: "pt-BR"
+

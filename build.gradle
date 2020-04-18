@@ -1,0 +1,75 @@
+plugins {
+    id "java"
+    id "war"
+    id "eclipse"
+    id "jacoco"
+    id "org.springframework.boot" version "2.1.6.RELEASE"
+    id "org.sonarqube" version "2.7.1"
+}
+
+apply plugin: "io.spring.dependency-management"
+
+apply from: "gradle/sonar.gradle"
+
+group = "br.com.quarkedu"
+sourceCompatibility = 1.11
+
+war {
+    enabled = true
+    baseName = "quarkedu-mobile-backend"
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url "${urlBase}"
+        credentials {
+            username = usuario
+            password = senha
+        }
+    }
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+}
+
+dependencies {
+	
+	compile("br.com.esig:ESIG-Framework:2.26.0")
+
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "io.springfox:springfox-swagger2:2.9.2"
+    implementation "io.springfox:springfox-swagger-ui:2.9.2"
+    implementation "joda-time:joda-time:2.3"
+    implementation "org.apache.commons:commons-lang3:3.9"
+    implementation "commons-codec:commons-codec:1.12"
+
+    implementation "org.modelmapper:modelmapper:2.3.2"
+
+    runtimeOnly "org.springframework.boot:spring-boot-devtools"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    
+}
+
+ext {
+	buildTimestamp = org.codehaus.groovy.runtime.DateGroovyMethods.format(new Date(), 'yyyyMMddHHmm')
+}
+
+ext['tomcat.version'] = '9.0.13'
+
+processResources {
+	filesMatching( '**/build.properties' ) {
+		expand( project.properties )
+	}
+
+}
+task ci(dependsOn: ['clean', 'war'])
+
+war.mustRunAfter clean
