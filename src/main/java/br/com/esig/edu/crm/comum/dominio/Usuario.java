@@ -16,6 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 /**
  * Entidade que representa os usuários do sistema.
  *
@@ -23,6 +27,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuario", schema = "comum")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class Usuario {
 
 	@Id
@@ -48,87 +55,9 @@ public class Usuario {
 	@JoinColumn(name = "instituicao_grupo_id")
 	private InstituicaoGrupo instituicaoGrupo;
 
-	public Usuario() {
-	}
-
+	
 	public Usuario(int id) {
 		this.id = id;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Date getLastLogin() {
-		return lastLogin;
-	}
-
-	public void setLastLogin(Date lastLogin) {
-		this.lastLogin = lastLogin;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public boolean isHabilitado() {
-		return habilitado;
-	}
-
-	public void setHabilitado(boolean habilitado) {
-		this.habilitado = habilitado;
-	}
-
-	public int getIdUsuario() {
-		return id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public InstituicaoGrupo getInstituicaoGrupo() {
-		return instituicaoGrupo;
-	}
-
-	public void setInstituicaoGrupo(InstituicaoGrupo instituicaoGrupo) {
-		this.instituicaoGrupo = instituicaoGrupo;
 	}
 
 }

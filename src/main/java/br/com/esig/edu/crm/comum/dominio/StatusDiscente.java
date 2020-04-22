@@ -12,6 +12,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 /**
  * Classe que define os possíveis status de um discente.
  *
@@ -19,6 +23,9 @@ import org.hibernate.annotations.Parameter;
  */
 @Entity
 @Table(name = "status_discente", schema = "ensino")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class StatusDiscente {
 
 	@Id
@@ -35,29 +42,5 @@ public class StatusDiscente {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_instituicao", nullable = true)
 	private Instituicao instituicao;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
-	}
 
 }

@@ -9,6 +9,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 /**
  * Entidade que representa uma determinada série/ano no ensino básico.
  * Representa as várias séries
@@ -18,6 +22,9 @@ import org.hibernate.annotations.Parameter;
  */
 @Entity
 @Table(name = "serie", schema = "basico", uniqueConstraints = {})
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class Serie {
 
 	@Id
@@ -29,20 +36,4 @@ public class Serie {
 
 	@Column(name = "descricao", nullable = false)
 	private String descricao;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
 }

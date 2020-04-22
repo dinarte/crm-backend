@@ -15,8 +15,10 @@ import javax.persistence.TemporalType;
 import br.com.esig.audit.annotations.AtualizadoEm;
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.utils.Formatador;
-import br.com.esig.utils.StringUtils;
 import br.com.esig.utils.ValidatorUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * Instituição de ensino é uma generalização para mapear Universidades,
@@ -30,6 +32,9 @@ import br.com.esig.utils.ValidatorUtil;
  */
 @Entity
 @Table(name = "instituicao_ensino", schema = "geral")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class InstituicaoEnsino {
 
 	@Id
@@ -114,184 +119,7 @@ public class InstituicaoEnsino {
 		this.id = id;
 	}
 
-	public InstituicaoEnsino(int id, String nome) {
-		this.id = id;
-		this.nome = nome;
-	}
-
-	public InstituicaoEnsino() {
-		super();
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public String getNomeMaiusculo() {
-
-		return StringUtils.upperCase(nome);
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
-	}
-
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
-	}
-
-	public Boolean getComplexoIntegrado() {
-		return complexoIntegrado;
-	}
-
-	public void setComplexoIntegrado(Boolean complexoIntegrado) {
-		this.complexoIntegrado = complexoIntegrado;
-	}
-
-	public InstituicaoEnsino getInstituicaoMae() {
-		return instituicaoMae;
-	}
-
-	public void setInstituicaoMae(InstituicaoEnsino instituicaoMae) {
-		this.instituicaoMae = instituicaoMae;
-	}
-
-	public String getSigla() {
-		return sigla;
-	}
-
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
-
-	public QualificacaoInstituicaoEnsino getQualificacaoInstituicaoEnsino() {
-		return qualificacaoInstituicaoEnsino;
-	}
-
-	public void setQualificacaoInstituicaoEnsino(QualificacaoInstituicaoEnsino qualificacaoInstituicaoEnsino) {
-		this.qualificacaoInstituicaoEnsino = qualificacaoInstituicaoEnsino;
-	}
-
-	public Municipio getMunicipio() {
-		return municipio;
-	}
-
-	public void setMunicipio(Municipio municipio) {
-		this.municipio = municipio;
-	}
-
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public Date getDataAtualizacao() {
-		return dataAtualizacao;
-	}
-
-	public void setDataAtualizacao(Date dataAtualizacao) {
-		this.dataAtualizacao = dataAtualizacao;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getHomepage() {
-		return homepage;
-	}
-
-	public void setHomepage(String homepage) {
-		this.homepage = homepage;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getMantenedora() {
-		return mantenedora;
-	}
-
-	public void setMantenedora(String mantenedora) {
-		this.mantenedora = mantenedora;
-	}
-
-	public Long getCnpj() {
-		return cnpj;
-	}
-
+	
 	public String getCnpjFormatado() {
 		if (ValidatorUtil.isEmpty(cnpj)) {
 			return "";
@@ -308,45 +136,6 @@ public class InstituicaoEnsino {
 		cnpjTratado = cnpjTratado.replace("/", "");
 		cnpjTratado = cnpjTratado.replace("-", "");
 		return cnpjTratado;
-	}
-
-	public void setCnpj(Long cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public String getInscricaoMunicipal() {
-		return inscricaoMunicipal;
-	}
-
-	public void setInscricaoMunicipal(String inscricaoMunicipal) {
-		this.inscricaoMunicipal = inscricaoMunicipal;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + getId();
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-
-		if (!(obj instanceof InstituicaoEnsino)) {
-			return false;
-		}
-		InstituicaoEnsino other = (InstituicaoEnsino) obj;
-		if (getId() != other.getId()) {
-			return false;
-		}
-		return true;
 	}
 
 }

@@ -17,6 +17,9 @@ import org.hibernate.annotations.Parameter;
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -26,6 +29,9 @@ import br.com.esig.edu.crm.comum.dominio.Usuario;
 
 @Entity
 @Table(name = "crm", schema = "funil_venda_etapa")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class FunilVendaEtapa {
 	
 	@Id
@@ -56,61 +62,5 @@ public class FunilVendaEtapa {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Integer getOrdem() {
-		return ordem;
-	}
-
-	public void setOrdem(Integer ordem) {
-		this.ordem = ordem;
-	}
-
-	public FunilVenda getFunilVenda() {
-		return funilVenda;
-	}
-
-	public void setFunilVenda(FunilVenda funilVenda) {
-		this.funilVenda = funilVenda;
-	}
-
-	public Usuario getUsuarioCadastro() {
-		return usuarioCadastro;
-	}
-
-	public void setUsuarioCadastro(Usuario usuarioCadastro) {
-		this.usuarioCadastro = usuarioCadastro;
-	}
-
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public FunilVendaEtapaTipo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(FunilVendaEtapaTipo tipo) {
-		this.tipo = tipo;
-	}
 	
 }

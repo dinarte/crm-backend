@@ -8,11 +8,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.esig.utils.EqualsUtil;
-import br.com.esig.utils.HashCodeUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tipo_filiacao", schema = "comum")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class TipoFiliacao  {
 
 	public static final TipoFiliacao PAI = new TipoFiliacao(1,"PAI");
@@ -30,47 +34,10 @@ public class TipoFiliacao  {
 	@br.com.esig.audit.annotations.Instituicao
 	private Instituicao instituicao;
 
-	public TipoFiliacao() {}
 	
 	public TipoFiliacao(int id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}
 	
-	public boolean isMae() {
-		return this.equals(MAE);
-	}
-	
-	public boolean isPai() {
-		return this.equals(PAI);
-	}
-	
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
-	}
-
-
-	@Override
-	public int hashCode() {
-		return HashCodeUtil.hashAll(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsUtil.testEquals(this, obj, "id");
-	}
-
 }

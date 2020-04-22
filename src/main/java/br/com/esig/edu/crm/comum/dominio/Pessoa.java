@@ -33,6 +33,9 @@ import com.google.gson.annotations.Expose;
 
 import br.com.esig.utils.Formatador;
 import br.com.esig.utils.ValidatorUtil;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @author gleydson
@@ -40,6 +43,9 @@ import br.com.esig.utils.ValidatorUtil;
  */
 @Entity
 @Table(name = "pessoa", schema = "comum")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "cpfCnpj", "id", "nomeAscii" })
 public class Pessoa {
 
 	@Id
@@ -118,10 +124,7 @@ public class Pessoa {
 	@Column(name = "telefone_corporativo")
 	private String telefoneCorporativo;
 
-	public Pessoa() {
-		municipio = new Municipio();
-	}
-
+	
 	public Pessoa(int id, String nome) {
 		this();
 		setId(id);
@@ -134,33 +137,6 @@ public class Pessoa {
 		this.cpfCnpj = cpfCnpj;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
-	}
-
-	public String getNome() {
-		return nome;
-	}
 
 	public String getNomeComCPF() {
 		return nome.concat(ValidatorUtil.isEmpty(cpfCnpj) ? "" : " (".concat(getCpfCnpjFormatado().concat(")")));
@@ -199,25 +175,7 @@ public class Pessoa {
 		this.nomeAscii = Normalizer.normalize(nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 	}
 
-	public String getNomeAscii() {
-		return nomeAscii;
-	}
-
-	public void setNomeAscii(String nomeAscii) {
-		this.nomeAscii = nomeAscii;
-	}
-
-	public String getAbreviacao() {
-		return abreviacao;
-	}
-
-	public void setAbreviacao(String abreviacao) {
-		this.abreviacao = abreviacao;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
+	
 
 	public String getDataNascimentoFormatada() {
 		if (dataNascimento != null) {
@@ -228,82 +186,7 @@ public class Pessoa {
 		}
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public SexoEnum getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(SexoEnum sexo) {
-		this.sexo = sexo;
-	}
-
-	public Long getCpfCnpj() {
-		return cpfCnpj;
-	}
-
-	public void setCpfCnpj(Long cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
-	}
-
-	public String getIdentidade() {
-		return identidade;
-	}
-
-	public void setIdentidade(String identidade) {
-		this.identidade = identidade;
-	}
-
-	public String getOrgaoEmissorRg() {
-		return orgaoEmissorRg;
-	}
-
-	public void setOrgaoEmissorRg(String orgaoEmissorRg) {
-		this.orgaoEmissorRg = orgaoEmissorRg;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
+	
 	public String getCep() {
 		if (ValidatorUtil.isEmpty(cep)) {
 			return cep;
@@ -325,14 +208,7 @@ public class Pessoa {
 		return Formatador.getInstance().formatarCep(Integer.parseInt(getCep()));
 	}
 
-	public Municipio getMunicipio() {
-		return municipio;
-	}
-
-	public void setMunicipio(Municipio municipio) {
-		this.municipio = municipio;
-	}
-
+	
 	public Object getEnderecoCompleto() {
 		if (logradouro != null) {
 			return logradouro.concat(ValidatorUtil.isNotEmpty(numero) ? ", número " + numero : "")
@@ -343,30 +219,6 @@ public class Pessoa {
 		} else {
 			return "";
 		}
-	}
-
-	public String getTelefoneFixo() {
-		return telefoneFixo;
-	}
-
-	public void setTelefoneFixo(String telefoneFixo) {
-		this.telefoneFixo = telefoneFixo;
-	}
-
-	public String getTelefoneCelular() {
-		return telefoneCelular;
-	}
-
-	public void setTelefoneCelular(String telefoneCelular) {
-		this.telefoneCelular = telefoneCelular;
-	}
-
-	public String getTelefoneCorporativo() {
-		return telefoneCorporativo;
-	}
-
-	public void setTelefoneCorporativo(String telefoneCorporativo) {
-		this.telefoneCorporativo = telefoneCorporativo;
 	}
 
 	public String getCpfCnpjNome() {
@@ -383,45 +235,4 @@ public class Pessoa {
 		return Formatador.getInstance().formatarCPF_CNPJ(cpfCnpj);
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((nomeAscii == null) ? 0 : nomeAscii.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Pessoa other = (Pessoa) obj;
-		if (cpfCnpj == null) {
-			if (other.cpfCnpj != null) {
-				return false;
-			}
-		} else if (!cpfCnpj.equals(other.cpfCnpj)) {
-			return false;
-		}
-		if (id != other.id) {
-			return false;
-		}
-		if (nomeAscii == null) {
-			if (other.nomeAscii != null) {
-				return false;
-			}
-		} else if (!nomeAscii.equalsIgnoreCase(other.nomeAscii)) {
-			return false;
-		}
-		return true;
-	}
 }

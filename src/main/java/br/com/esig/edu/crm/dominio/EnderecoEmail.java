@@ -17,6 +17,9 @@ import org.hibernate.annotations.Parameter;
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -25,6 +28,9 @@ import br.com.esig.edu.crm.comum.dominio.Usuario;
 
 @Entity
 @Table(name = "crm", schema = "endereco_email")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class EnderecoEmail {
 
 	@Id
@@ -48,47 +54,5 @@ public class EnderecoEmail {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Contato getContato() {
-		return contato;
-	}
-
-	public void setContato(Contato contato) {
-		this.contato = contato;
-	}
-
-	public Usuario getUsuarioCadastro() {
-		return usuarioCadastro;
-	}
-
-	public void setUsuarioCadastro(Usuario usuarioCadastro) {
-		this.usuarioCadastro = usuarioCadastro;
-	}
-
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-
 
 }

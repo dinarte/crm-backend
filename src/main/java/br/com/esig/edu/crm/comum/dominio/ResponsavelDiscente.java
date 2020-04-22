@@ -8,8 +8,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "responsavel_discente", schema = "ensino")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class ResponsavelDiscente {
 
 	@Id
@@ -29,45 +36,5 @@ public class ResponsavelDiscente {
 
 	@Column(name = "financeiro")
 	private Boolean financeiro = false;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Discente getDiscente() {
-		return discente;
-	}
-
-	public void setDiscente(Discente discente) {
-		this.discente = discente;
-	}
-
-	public Responsavel getResponsavel() {
-		return responsavel;
-	}
-
-	public void setResponsavel(Responsavel responsavel) {
-		this.responsavel = responsavel;
-	}
-
-	public TipoFiliacao getTipoFiliacao() {
-		return tipoFiliacao;
-	}
-
-	public void setTipoFiliacao(TipoFiliacao tipoFiliacao) {
-		this.tipoFiliacao = tipoFiliacao;
-	}
-
-	public Boolean getFinanceiro() {
-		return financeiro;
-	}
-
-	public void setFinanceiro(Boolean financeiro) {
-		this.financeiro = financeiro;
-	}
-
+	
 }

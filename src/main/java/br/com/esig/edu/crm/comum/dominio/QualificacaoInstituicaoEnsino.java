@@ -21,6 +21,9 @@ import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.utils.EqualsUtil;
 import br.com.esig.utils.HashCodeUtil;
 import br.com.esig.utils.StringUtils;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @author geyson.soares
@@ -28,6 +31,9 @@ import br.com.esig.utils.StringUtils;
  */
 @Entity
 @Table(name = "qualificacao_instituicao_ensino", schema = "geral")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class QualificacaoInstituicaoEnsino {
 
 	@Id
@@ -52,60 +58,5 @@ public class QualificacaoInstituicaoEnsino {
 	@JoinColumn(name = "instituicao_id", nullable = true)
 	@br.com.esig.audit.annotations.Instituicao
 	private Instituicao instituicao;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getSigla() {
-		return sigla;
-	}
-
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
-
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
-	}
-
-	@Transient
-	public String getNomeCamelCase() {
-		return StringUtils.primeriaMaiuscula(this.nome);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeUtil.hashAll(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsUtil.testEquals(this, obj, "id");
-	}
 
 }

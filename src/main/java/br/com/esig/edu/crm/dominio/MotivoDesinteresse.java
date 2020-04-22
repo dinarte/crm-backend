@@ -18,6 +18,9 @@ import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
 import br.com.esig.edu.crm.comum.dominio.Instituicao;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -28,6 +31,9 @@ import br.com.esig.edu.crm.comum.dominio.Usuario;
 
 @Entity
 @Table(name = "crm", schema = "motivo_desinteresse")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class MotivoDesinteresse {
 
 	@Id
@@ -53,19 +59,4 @@ public class MotivoDesinteresse {
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 }

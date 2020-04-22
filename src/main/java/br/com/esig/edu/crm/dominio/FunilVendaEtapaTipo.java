@@ -1,7 +1,6 @@
 package br.com.esig.edu.crm.dominio;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -20,6 +18,9 @@ import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
 import br.com.esig.edu.crm.comum.dominio.Instituicao;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -31,6 +32,9 @@ import br.com.esig.edu.crm.comum.dominio.Usuario;
 
 @Entity
 @Table(name = "crm", schema = "funil_venda_etapa_tipo")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class FunilVendaEtapaTipo {
 
 	@Id
@@ -55,20 +59,5 @@ public class FunilVendaEtapaTipo {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	
 }

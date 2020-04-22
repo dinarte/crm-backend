@@ -13,8 +13,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "instituicao_grupo", schema = "comum")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class InstituicaoGrupo {
 
 	@Id
@@ -23,21 +30,5 @@ public class InstituicaoGrupo {
 
 	@Column(name = "denominacao")
 	private String nome;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 }

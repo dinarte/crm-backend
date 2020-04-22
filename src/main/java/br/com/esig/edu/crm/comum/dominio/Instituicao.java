@@ -16,8 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "instituicao", schema = "comum")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class Instituicao {
 
 	@Id
@@ -40,72 +47,5 @@ public class Instituicao {
 	@ManyToOne
 	@JoinColumn(name = "instituicao_grupo_id")
 	private InstituicaoGrupo instituicaoGrupo;
-
-	public Instituicao() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getNomeExibicao() {
-		return nomeExibicao;
-	}
-
-	public void setNomeExibicao(String nomeExibicao) {
-		this.nomeExibicao = nomeExibicao;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getEmailFinanceiro() {
-		return emailFinanceiro;
-	}
-
-	public void setEmailFinanceiro(String emailFinanceiro) {
-		this.emailFinanceiro = emailFinanceiro;
-	}
-
-	public Long getCpfCnpj() {
-		return cpfCnpj;
-	}
-
-	public void setCpfCnpj(Long cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
-	}
-
-	public InstituicaoGrupo getInstituicaoGrupo() {
-		return instituicaoGrupo;
-	}
-
-	public void setInstituicaoGrupo(InstituicaoGrupo instituicaoGrupo) {
-		this.instituicaoGrupo = instituicaoGrupo;
-	}
 
 }

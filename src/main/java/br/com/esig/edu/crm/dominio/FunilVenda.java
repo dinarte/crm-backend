@@ -20,6 +20,9 @@ import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
 import br.com.esig.edu.crm.comum.dominio.Instituicao;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -34,6 +37,9 @@ import br.com.esig.edu.crm.comum.dominio.Usuario;
 
 @Entity
 @Table(name = "crm", schema = "funil_venda")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class FunilVenda {
 
 	@Id
@@ -61,54 +67,5 @@ public class FunilVenda {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public List<FunilVendaEtapa> getEtapas() {
-		return etapas;
-	}
-
-	public void setEtapas(List<FunilVendaEtapa> etapas) {
-		this.etapas = etapas;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
-	}
-
-	public Usuario getUsuarioCadastro() {
-		return usuarioCadastro;
-	}
-
-	public void setUsuarioCadastro(Usuario usuarioCadastro) {
-		this.usuarioCadastro = usuarioCadastro;
-	}
-
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-	
 	
 }

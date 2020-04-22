@@ -1,6 +1,7 @@
 package br.com.esig.edu.crm.dominio;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +17,15 @@ import org.hibernate.annotations.Parameter;
 
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
+import br.com.esig.edu.crm.comum.dominio.Discente;
+import br.com.esig.edu.crm.comum.dominio.InstituicaoEnsino;
+import br.com.esig.edu.crm.comum.dominio.Pessoa;
+import br.com.esig.edu.crm.comum.dominio.ResponsavelDiscente;
+import br.com.esig.edu.crm.comum.dominio.StatusDiscente;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
-
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Dinarte
@@ -25,13 +33,15 @@ import br.com.esig.edu.crm.comum.dominio.Usuario;
 
 @Entity
 @Table(name = "crm", schema = "telefone")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class Telefone {
 
 	public static final String PESSOAL = "Pessoal";
 	public static final String COMERCIAL = "Comercial";
 	public static final String TERCEIRO = "Terceiro";
 	public static final String OUTRO = "Outro";
-	
 	
 	@Id
 	@GeneratedValue(generator = "telefone_generator")
@@ -60,69 +70,5 @@ public class Telefone {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getCodigoArea() {
-		return codigoArea;
-	}
-
-	public void setCodigoArea(String codigoArea) {
-		this.codigoArea = codigoArea;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public Contato getContato() {
-		return contato;
-	}
-
-	public void setContato(Contato contato) {
-		this.contato = contato;
-	}
-
-	public Usuario getUsuarioCadastro() {
-		return usuarioCadastro;
-	}
-
-	public void setUsuarioCadastro(Usuario usuarioCadastro) {
-		this.usuarioCadastro = usuarioCadastro;
-	}
-
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
 
 }

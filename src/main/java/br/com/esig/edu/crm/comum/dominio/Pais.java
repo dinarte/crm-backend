@@ -8,6 +8,9 @@
  */
 package br.com.esig.edu.crm.comum.dominio;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +21,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import br.com.esig.edu.crm.dominio.Contato;
+import br.com.esig.edu.crm.dominio.EnderecoEmail;
+import br.com.esig.edu.crm.dominio.Telefone;
 import br.com.esig.utils.EqualsUtil;
 import br.com.esig.utils.HashCodeUtil;
 import br.com.esig.validacao.PersistDB;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * Classe comum referente ao país.
@@ -30,6 +39,9 @@ import br.com.esig.validacao.PersistDB;
 @Entity
 @Table(name = "pais", schema = "comum")
 @Cacheable
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class Pais implements PersistDB {
 
 	private static final long serialVersionUID = -3433675926686464612L;
@@ -49,47 +61,10 @@ public class Pais implements PersistDB {
 	@Column(name = "ativo")
 	private boolean ativo;
 
-	public Pais() {
-	}
+	
 
 	public Pais(int id) {
 		this.id = id;
-	}
-
-	@Override
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeUtil.hashAll(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsUtil.testEquals(this, obj, "id");
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
 	}
 
 }

@@ -1,6 +1,7 @@
 package br.com.esig.edu.crm.comum.dominio;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +13,18 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.esig.edu.crm.dominio.Contato;
+import br.com.esig.edu.crm.dominio.EnderecoEmail;
+import br.com.esig.edu.crm.dominio.Telefone;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(schema = "ensino", name = "periodo_letivo")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class PeriodoLetivo {
 
 	@Id
@@ -34,45 +45,5 @@ public class PeriodoLetivo {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_fim", nullable = false)
 	private Date dataFim;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDenominacao() {
-		return denominacao;
-	}
-
-	public void setDenominacao(String denominacao) {
-		this.denominacao = denominacao;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
-	}
-
-	public Date getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public Date getDataFim() {
-		return dataFim;
-	}
-
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
-	}
 
 }

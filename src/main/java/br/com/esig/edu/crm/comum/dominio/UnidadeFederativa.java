@@ -20,6 +20,9 @@ import javax.persistence.Table;
 import br.com.esig.utils.EqualsUtil;
 import br.com.esig.utils.HashCodeUtil;
 import br.com.esig.validacao.PersistDB;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -28,6 +31,9 @@ import br.com.esig.validacao.PersistDB;
 @Entity
 @Table(name = "uf", schema = "comum")
 @Cacheable
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class UnidadeFederativa implements PersistDB {
 
 	private static final long serialVersionUID = -6723381359776396101L;
@@ -47,50 +53,4 @@ public class UnidadeFederativa implements PersistDB {
 	@JoinColumn(name = "id_pais")
 	private Pais pais;
 
-	public UnidadeFederativa() {
-	}
-
-	@Override
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getSigla() {
-		return sigla;
-	}
-
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
-
-	public Pais getPais() {
-		return pais;
-	}
-
-	public void setPais(Pais pais) {
-		this.pais = pais;
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeUtil.hashAll(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsUtil.testEquals(this, obj, "id");
-	}
 }

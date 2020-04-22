@@ -21,10 +21,10 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import br.com.esig.utils.EqualsUtil;
-import br.com.esig.utils.HashCodeUtil;
 import br.com.esig.utils.ValidatorUtil;
-import br.com.esig.validacao.PersistDB;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * Entidade que representa um município brasileiro.
@@ -34,9 +34,10 @@ import br.com.esig.validacao.PersistDB;
 @Entity
 @Table(name = "municipio", schema = "comum")
 @Cacheable
-public class Municipio implements PersistDB {
-
-	private static final long serialVersionUID = 4551920053073108451L;
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
+public class Municipio{
 
 	@Id
 	@GeneratedValue(generator = "municipioGenerator")
@@ -64,49 +65,7 @@ public class Municipio implements PersistDB {
 	@Column(name = "ativo")
 	private boolean ativo;
 
-	@Override
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public boolean isCapital() {
-		return capital;
-	}
-
-	public void setCapital(boolean capital) {
-		this.capital = capital;
-	}
-
-	public String getCodIBGE() {
-		return codIBGE;
-	}
-
-	public void setCodIBGE(String codIBGE) {
-		this.codIBGE = codIBGE;
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeUtil.hashAll(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsUtil.testEquals(this, obj, "id");
-	}
+	
 
 	public String getDescricaoCompleta() {
 
@@ -133,29 +92,4 @@ public class Municipio implements PersistDB {
 
 		return nome;
 	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public UnidadeFederativa getUf() {
-		return uf;
-	}
-
-	public void setUf(UnidadeFederativa uf) {
-		this.uf = uf;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
 }

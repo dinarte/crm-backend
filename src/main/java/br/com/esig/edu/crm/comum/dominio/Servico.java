@@ -10,8 +10,15 @@ import javax.persistence.Table;
 
 import com.google.gson.annotations.Expose;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "servico", schema = "financeiro")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class Servico {
 
 	@Id
@@ -32,40 +39,4 @@ public class Servico {
 	public Servico(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Servico() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
-	}
-
 }
