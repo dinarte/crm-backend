@@ -55,13 +55,23 @@ public class Lead {
 	
 	private BigDecimal valor; 
 	
+	private boolean desinteressado;
+	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_etapa", unique = false, nullable = true)
 	private FunilVendaEtapa etapa;
 	
 	@OneToMany(mappedBy = "lead", fetch = FetchType.LAZY)
 	private List<LeadProduto> produtos;
+
+	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_campanha", unique = false, nullable = true)
+	private Campanha campanha;
 	
+	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_motivo_desinteresse", unique = false, nullable = true)
+	private MotivoDesinteresse motivoDesinteresse;
+		
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_instituicao", unique = false, nullable = true)
 	@br.com.esig.audit.annotations.Instituicao

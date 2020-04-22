@@ -49,6 +49,8 @@ public class LeadProduto {
 	@JoinColumn(name = "id_produto", unique = false, nullable = false)
 	private Produto produto;
 	
+	private Integer quantidade = 1;
+	
 	@CriadoPor
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_usuario_cadastro", unique = false, nullable = true)

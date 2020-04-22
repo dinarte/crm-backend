@@ -71,5 +71,21 @@ public class Endereco {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
+	
+	public boolean isResidencial() {
+		return tipo.equals(RESIDENCIAL);
+	}
+	
+	public boolean isComercial() {
+		return tipo.equals(COMERCIAL);
+	}
+	
+	public boolean isTerceiro() {
+		return tipo.equals(TERCEIRO);
+	}
+	
+	public boolean isOutro() {
+		return tipo.equals(OUTRO);
+	}
 
 }

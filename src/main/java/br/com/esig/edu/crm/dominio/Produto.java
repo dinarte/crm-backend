@@ -77,4 +77,16 @@ public class Produto {
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
 	
+	public boolean isAnuidade() {
+		return unidade.equals(UNIDADE_ANUIDADE);
+	}
+	
+	public boolean isMensalidade() {
+		return unidade.equals(UNIDADE_MENSALIDADE);
+	}
+	
+	public boolean isUnidade() {
+		return unidade.equals(UNIDADE_UNIDADE);
+	}
+	
 }

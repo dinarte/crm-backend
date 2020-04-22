@@ -1,7 +1,6 @@
 package br.com.esig.edu.crm.dominio;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +16,6 @@ import org.hibernate.annotations.Parameter;
 
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
-import br.com.esig.edu.crm.comum.dominio.Discente;
-import br.com.esig.edu.crm.comum.dominio.InstituicaoEnsino;
-import br.com.esig.edu.crm.comum.dominio.Pessoa;
-import br.com.esig.edu.crm.comum.dominio.ResponsavelDiscente;
-import br.com.esig.edu.crm.comum.dominio.StatusDiscente;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -70,5 +64,22 @@ public class Telefone {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
+	
+	
+	public boolean isPessoal() {
+		return tipo.equals(PESSOAL);
+	}
+	
+	public boolean isComercial() {
+		return tipo.equals(COMERCIAL);
+	}
+	
+	public boolean isTerceiro() {
+		return tipo.equals(TERCEIRO);
+	}
+	
+	public boolean isOutro() {
+		return tipo.equals(OUTRO);
+	}
 
 }
