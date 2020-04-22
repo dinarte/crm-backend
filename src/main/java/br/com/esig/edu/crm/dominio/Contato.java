@@ -60,6 +60,9 @@ public class Contato {
 
 	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY)
 	private List<Telefone> telefones;
+
+	@OneToMany(mappedBy = "endereco", fetch = FetchType.LAZY)
+	private List<Telefone> enderecos;
 	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_instituicao", unique = false, nullable = true)

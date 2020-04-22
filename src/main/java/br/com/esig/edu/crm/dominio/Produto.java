@@ -64,7 +64,7 @@ public class Produto {
 	private Serie serie;
 
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_instituicao", unique = false, nullable = true)
+	@JoinColumn(name = "id_instituicao", unique = false, nullable = false)
 	@br.com.esig.audit.annotations.Instituicao
 	private Instituicao instituicao;
 	
