@@ -11,7 +11,11 @@ package br.com.esig.edu.crm.comum.dto;
 import java.util.Date;
 
 import br.com.esig.edu.crm.comum.dominio.SexoEnum;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 public class PessoaDTO {
 
 	private int id;
@@ -20,53 +24,5 @@ public class PessoaDTO {
 	private Date dataNascimento;
 	private SexoEnum sexo;
 	private Long cpfCnpj;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getNomeAscii() {
-		return nomeAscii;
-	}
-
-	public void setNomeAscii(String nomeAscii) {
-		this.nomeAscii = nomeAscii;
-	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public SexoEnum getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(SexoEnum sexo) {
-		this.sexo = sexo;
-	}
-
-	public Long getCpfCnpj() {
-		return cpfCnpj;
-	}
-
-	public void setCpfCnpj(Long cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
-	}
 
 }
