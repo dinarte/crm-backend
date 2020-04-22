@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * Classe mÃ£e de todos os tipos de alunos. Usada como base para DiscenteBasico,
+ * Classe mãe de todos os tipos de alunos. Usada como base para DiscenteBasico,
  * DiscenteGraduacao, DiscenteLato.....
  *
  * @author Gleydson Lima

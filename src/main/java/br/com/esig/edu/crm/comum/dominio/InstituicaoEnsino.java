@@ -19,10 +19,10 @@ import br.com.esig.utils.StringUtils;
 import br.com.esig.utils.ValidatorUtil;
 
 /**
- * Instituição acadêmica é uma generalização para mapear Universidades,
+ * Instituição de ensino é uma generalização para mapear Universidades,
  * Institutos ou Escolas. Uma Instituicao (cliente) poderá ter várias
  * instituições acadêmicas vinculadas, que por sua vez poderá ter várias
- * unidades acadêmicas (InstituicaoAcademicaUnidade).
+ * unidades acadêmicas (InstituicaoEnsinoUnidade).
  *
  *
  * @author gleydson
