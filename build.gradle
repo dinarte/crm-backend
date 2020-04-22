@@ -5,6 +5,7 @@ plugins {
     id "jacoco"
     id "org.springframework.boot" version "2.1.6.RELEASE"
     id "org.sonarqube" version "2.7.1"
+    id "io.freefair.lombok" version "5.0.0-rc2"
 }
 
 apply plugin: "io.spring.dependency-management"
@@ -55,6 +56,9 @@ dependencies {
 
     runtimeOnly "org.springframework.boot:spring-boot-devtools"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    
+     compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
     
 }
 

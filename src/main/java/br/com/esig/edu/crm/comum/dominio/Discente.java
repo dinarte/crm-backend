@@ -14,6 +14,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 /**
  * Classe mÃ£e de todos os tipos de alunos. Usada como base para DiscenteBasico,
  * DiscenteGraduacao, DiscenteLato.....
@@ -23,6 +27,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "discente", schema = "ensino")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
 public class Discente {
 
 	@Id
@@ -51,61 +58,5 @@ public class Discente {
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_instituicao_ensino", unique = false, nullable = true)
 	private InstituicaoEnsino instituicaoEnsino;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Set<ResponsavelDiscente> getDiscenteResponsaveis() {
-		return discenteResponsaveis;
-	}
-
-	public void setDiscenteResponsaveis(Set<ResponsavelDiscente> discenteResponsaveis) {
-		this.discenteResponsaveis = discenteResponsaveis;
-	}
-
-	public Date getDataIngresso() {
-		return dataIngresso;
-	}
-
-	public void setDataIngresso(Date dataIngresso) {
-		this.dataIngresso = dataIngresso;
-	}
-
-	public String getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
-
-	public StatusDiscente getStatusDiscente() {
-		return statusDiscente;
-	}
-
-	public void setStatusDiscente(StatusDiscente statusDiscente) {
-		this.statusDiscente = statusDiscente;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	public InstituicaoEnsino getInstituicaoEnsino() {
-		return instituicaoEnsino;
-	}
-
-	public void setInstituicaoEnsino(InstituicaoEnsino instituicaoEnsino) {
-		this.instituicaoEnsino = instituicaoEnsino;
-	}
 
 }
