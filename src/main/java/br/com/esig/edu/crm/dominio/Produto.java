@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
  * @author Dinarte
  */
 @Entity
-@Table(name = "crm", schema = "produto")
+@Table(schema = "crm", name = "produto")
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = { "id" })

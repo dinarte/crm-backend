@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
  */
 
 @Entity
-@Table(name = "crm", schema = "funil_venda_etapa")
+@Table(schema = "crm", name = "funil_venda_etapa")
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = { "id" })

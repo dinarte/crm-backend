@@ -27,6 +27,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = { "id" })
 public class Instituicao {
 
+
 	@Id
 	@Column(name = "id")
 	private int id;
@@ -47,5 +48,10 @@ public class Instituicao {
 	@ManyToOne
 	@JoinColumn(name = "instituicao_grupo_id")
 	private InstituicaoGrupo instituicaoGrupo;
+	
+	public Instituicao(int id) {
+		this.id = id;
+	}
+
 
 }

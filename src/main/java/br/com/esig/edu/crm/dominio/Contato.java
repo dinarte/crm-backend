@@ -36,7 +36,7 @@ import lombok.NoArgsConstructor;
  */
 
 @Entity
-@Table(name = "crm", schema = "contato")
+@Table(schema = "crm", name = "contato")
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = { "id" })
@@ -61,8 +61,8 @@ public class Contato {
 	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY)
 	private List<Telefone> telefones;
 
-	@OneToMany(mappedBy = "endereco", fetch = FetchType.LAZY)
-	private List<Telefone> enderecos;
+	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY)
+	private List<Endereco> enderecos;
 	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_instituicao", unique = false, nullable = true)

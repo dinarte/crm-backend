@@ -14,7 +14,7 @@ esig:
       url: https://mfiles.esig.com.br
       dskey: blank-por-enquanto-nao-usa
   audit:
-     enabled: true
+     enabled: false
      provider: mlog
   jobs:
     habilitado: false

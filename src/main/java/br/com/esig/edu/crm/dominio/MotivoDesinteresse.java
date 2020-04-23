@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
  */
 
 @Entity
-@Table(name = "crm", schema = "motivo_desinteresse")
+@Table(schema = "crm", name = "motivo_desinteresse")
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = { "id" })

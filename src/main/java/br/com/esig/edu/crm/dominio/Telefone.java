@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
  */
 
 @Entity
-@Table(name = "crm", schema = "telefone")
+@Table(schema = "crm", name = "telefone")
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = { "id" })
@@ -81,5 +81,5 @@ public class Telefone {
 	public boolean isOutro() {
 		return tipo.equals(OUTRO);
 	}
-
+	
 }

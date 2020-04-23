@@ -36,7 +36,7 @@ import lombok.NoArgsConstructor;
  */
 
 @Entity
-@Table(name = "crm", schema = "funil_venda")
+@Table(schema = "crm", name = "funil_venda")
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = { "id" })
@@ -51,7 +51,7 @@ public class FunilVenda {
 	
 	private String nome;
 	
-	@OneToMany(mappedBy = "funilVendas", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "funilVenda", fetch = FetchType.LAZY)
 	private List<FunilVendaEtapa> etapas;
 	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)

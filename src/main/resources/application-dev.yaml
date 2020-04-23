@@ -1,6 +1,8 @@
 spring:
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
 esig:
   jwt:
     secretKey: AE576823DAAD3D041139D463FDF3173538CF6688EB6D1964BF2CE9637F93EDE4
