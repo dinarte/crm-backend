@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.esig.excecoes.AuthenticationException;
 import br.com.esig.excecoes.ResourceNotFoundException;
 import br.com.esig.utils.ValidatorUtil;
 import io.jsonwebtoken.MalformedJwtException;
@@ -22,6 +23,11 @@ public class AppExceptionHandler {
 		return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);
     }
 	
+	@ExceptionHandler(value = AuthenticationException.class)
+    public ResponseEntity<AppError> appAuthenticationException(AuthenticationException e){
+		AppError erro = new AppError(e, HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>(erro, HttpStatus.UNAUTHORIZED);
+    }
 	
 	@ExceptionHandler(value = SignatureException.class)
     public ResponseEntity<AppError> appSignatureExceptionHandler(SignatureException e){
@@ -35,8 +41,6 @@ public class AppExceptionHandler {
 		AppError erro = new AppError(e, HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<>(erro, HttpStatus.BAD_REQUEST);
     }
-	
-	
 	
 	@ExceptionHandler(value = Exception.class)
     public ResponseEntity<AppError> appExceptionHandler(ResourceNotFoundException e){

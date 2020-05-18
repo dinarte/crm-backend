@@ -14,8 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.esig.edu.crm.dominio.Contato;
-import br.com.esig.edu.crm.dominio.EnderecoEmail;
-import br.com.esig.edu.crm.dominio.Telefone;
+import br.com.esig.edu.crm.dominio.dto.EnderecoEmailDTO;
+import br.com.esig.edu.crm.dominio.dto.TelefoneDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

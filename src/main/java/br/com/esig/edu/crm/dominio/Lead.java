@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -49,7 +52,7 @@ public class Lead {
 	@Column(name = "id_lead", unique = true, nullable = false, insertable = true, updatable = true)
 	private int id;
 	
-	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_contato", unique = false, nullable = false)
 	private Contato contato;
 	
@@ -61,21 +64,32 @@ public class Lead {
 	@JoinColumn(name = "id_etapa", unique = false, nullable = true)
 	private FunilVendaEtapa etapa;
 	
-	@OneToMany(mappedBy = "lead", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "lead", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<LeadProduto> produtos;
 
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_campanha", unique = false, nullable = true)
 	private Campanha campanha;
 	
+	@Enumerated(EnumType.ORDINAL)
+	private PrioridadeEnum prioridade = PrioridadeEnum.LEVE;
+	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_motivo_desinteresse", unique = false, nullable = true)
 	private MotivoDesinteresse motivoDesinteresse;
+	
+	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_forma_captacao", unique = false, nullable = true)
+	private FormaCaptacao formaCaptacao;
 		
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_instituicao", unique = false, nullable = true)
 	@br.com.esig.audit.annotations.Instituicao
 	private Instituicao instituicao;
+	
+	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_usuario_responsavel", unique = false, nullable = true)
+	private Usuario usuarioResponsavel;
 	
 	@CriadoPor
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
@@ -85,5 +99,10 @@ public class Lead {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
+	
+	
+	@CriadoEm
+	@Column(name="data_ultima_interacao")
+	private Date dataUltimaInteracao;
 
 }

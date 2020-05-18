@@ -14,9 +14,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
+import br.com.esig.edu.crm.dominio.Contato;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -41,7 +44,8 @@ public class EnderecoEmail {
 	private int id;
 	
 	private String email;
-		
+	
+	@JsonBackReference
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_contato", unique = false, nullable = true)
 	private Contato contato;
@@ -54,5 +58,9 @@ public class EnderecoEmail {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
+	
+	public String toString(){
+		return super.toString();
+	}
 
 }

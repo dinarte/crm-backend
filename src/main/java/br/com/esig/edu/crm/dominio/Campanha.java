@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -48,6 +49,7 @@ public class Campanha {
 	@Column(name = "id_campanha", unique = true, nullable = false, insertable = true, updatable = true)
 	private int id;
 	
+	@NotNull(message = "Nome é obrigatório")
 	private String nome;
 	
 	private String Descricao;

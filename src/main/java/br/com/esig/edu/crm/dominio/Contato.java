@@ -3,6 +3,7 @@ package br.com.esig.edu.crm.dominio;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
@@ -42,6 +45,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = { "id" })
 public class Contato {
 
+	
+
 	@Id
 	@GeneratedValue(generator = "contato_generator")
 	@GenericGenerator(name = "contato_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
@@ -55,13 +60,19 @@ public class Contato {
 	
 	private String url;
 	
-	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY)
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<EnderecoEmail> emails;
 
-	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY)
+	
+	@JsonManagedReference	
+	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 
-	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY)
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "contato", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Endereco> enderecos;
 	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
@@ -77,5 +88,14 @@ public class Contato {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
+	
+	
+	public Contato(int id) {
+		this.id = id;
+	}
+	
+	public String toString(){
+		return super.toString();
+	}
 
 }

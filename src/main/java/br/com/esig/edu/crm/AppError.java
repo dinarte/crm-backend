@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -24,6 +25,8 @@ public class AppError {
 	
 	@NonNull
 	private String message;
+	
+	private BindingResult details;
 	
 	private String trace;
 	

@@ -18,7 +18,7 @@ import org.hibernate.annotations.Parameter;
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
 import br.com.esig.edu.crm.comum.dominio.Instituicao;
-import br.com.esig.edu.crm.comum.dominio.Serie;
+import br.com.esig.edu.crm.comum.dominio.ServicoSerie;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,6 +40,7 @@ public class Produto {
 	public static final String UNIDADE_ANUIDADE = "ANUIDADE";
 	public static final String UNIDADE_MENSALIDADE = "MENSALIDADE";
 	public static final String UNIDADE_UNIDADE = "UNIDADE";
+	public static final String UNIDADE_RECORRENTE = "RECORRENTE";
 	
 	@Id
 	@GeneratedValue(generator = "produtoGenerator")
@@ -60,8 +61,8 @@ public class Produto {
 	private String unidade = UNIDADE_ANUIDADE;
 	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_serie", unique = false, nullable = true)
-	private Serie serie;
+	@JoinColumn(name = "id_servico_serie", unique = false, nullable = true)
+	private ServicoSerie servicoSerie;
 
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_instituicao", unique = false, nullable = false)

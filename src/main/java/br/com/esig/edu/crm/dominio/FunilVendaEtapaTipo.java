@@ -37,6 +37,10 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = { "id" })
 public class FunilVendaEtapaTipo {
 
+	public FunilVendaEtapaTipo(Integer tipoEtapaId) {
+		this.id = tipoEtapaId;
+	}
+
 	@Id
 	@GeneratedValue(generator = "funil_venda_etapa_tipo_generator")
 	@GenericGenerator(name = "funil_venda_etapa_tipo_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
@@ -45,6 +49,8 @@ public class FunilVendaEtapaTipo {
 	private int id;
 	
 	private String nome;
+	
+	private Integer ordem;
 	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_instituicao", unique = false, nullable = true)

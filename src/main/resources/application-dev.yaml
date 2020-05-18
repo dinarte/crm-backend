@@ -3,6 +3,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+      enable_lazy_load_no_trans: true
 esig:
   jwt:
     secretKey: AE576823DAAD3D041139D463FDF3173538CF6688EB6D1964BF2CE9637F93EDE4

@@ -59,5 +59,9 @@ public class LeadProduto {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
+	
+	public String toString() {
+		return super.toString();
+	}
 
 }

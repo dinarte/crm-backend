@@ -42,7 +42,7 @@ sourceSets {
 
 dependencies {
 	
-	compile("br.com.esig:ESIG-Framework:2.26.0")
+	compile("br.com.esig:ESIG-Framework:2.27.3")
 
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-web"

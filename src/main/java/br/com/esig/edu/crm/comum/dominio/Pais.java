@@ -22,8 +22,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import br.com.esig.edu.crm.dominio.Contato;
-import br.com.esig.edu.crm.dominio.EnderecoEmail;
-import br.com.esig.edu.crm.dominio.Telefone;
+import br.com.esig.edu.crm.dominio.dto.EnderecoEmailDTO;
+import br.com.esig.edu.crm.dominio.dto.TelefoneDTO;
 import br.com.esig.utils.EqualsUtil;
 import br.com.esig.utils.HashCodeUtil;
 import br.com.esig.validacao.PersistDB;

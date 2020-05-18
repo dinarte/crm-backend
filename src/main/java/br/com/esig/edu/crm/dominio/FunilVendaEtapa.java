@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
@@ -45,11 +47,11 @@ public class FunilVendaEtapa {
 	
 	private Integer ordem;
 	
-	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_funil_venda_etapa_tipo", unique = false, nullable = false)
 	private FunilVendaEtapaTipo tipo;
 
-	
+	@JsonBackReference
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_funil_venda", unique = false, nullable = false)
 	private FunilVenda funilVenda;
@@ -62,5 +64,14 @@ public class FunilVendaEtapa {
 	@CriadoEm
 	@Column(name="data_cadastro")
 	private Date dataCadastro;
+	
+	public FunilVendaEtapa(Integer etapaId) {
+		this.id = etapaId;
+	}
+	
+	public String toString() {
+		return super.toString();
+	}
+
 	
 }

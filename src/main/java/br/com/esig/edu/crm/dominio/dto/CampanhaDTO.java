@@ -3,8 +3,8 @@ package br.com.esig.edu.crm.dominio.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import br.com.esig.edu.crm.comum.dominio.Instituicao;
-import br.com.esig.edu.crm.comum.dominio.Usuario;
+import br.com.esig.edu.crm.comum.dto.InstituicaoDTO;
+import br.com.esig.mcore.auth.dto.UsuarioDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -28,9 +28,9 @@ public class CampanhaDTO {
 	
 	private BigDecimal custo;
 	
-	private Instituicao instituicao;
+	private InstituicaoDTO instituicao;
 	
-	private Usuario usuarioCadastro;
+	private UsuarioDTO usuarioCadastro;
 	
 	private Date dataCadastro;
 

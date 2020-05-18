@@ -2,7 +2,7 @@ package br.com.esig.edu.crm.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.esig.edu.crm.comum.dominio.Usuario;
@@ -21,11 +21,13 @@ public class LogonCrmRestController {
 
 	@Autowired
 	LogonCrmService logonService;
+	
+	
 
 	@PostMapping(value = "/api/auth")
-	public AutenticacaoResponse logar(@RequestParam("login") String login, @RequestParam("senha") String senha) {
+	public AutenticacaoResponse logar(@RequestBody Credencials credencials) {
 
-		UsuarioAutenticacao usuario = logonService.getUsuarioByLoginAndSenha(login, senha);
+		UsuarioAutenticacao usuario = logonService.getUsuarioByLoginAndSenha(credencials.getLogin(), credencials.getSenha());
 		if (usuario == null) {
 			throw new AuthenticationException("Usuário/Senha não encontrados");
 		} else {

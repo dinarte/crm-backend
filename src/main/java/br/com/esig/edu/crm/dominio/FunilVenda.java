@@ -3,6 +3,7 @@ package br.com.esig.edu.crm.dominio;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,10 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.esig.audit.annotations.CriadoEm;
 import br.com.esig.audit.annotations.CriadoPor;
@@ -51,7 +55,9 @@ public class FunilVenda {
 	
 	private String nome;
 	
-	@OneToMany(mappedBy = "funilVenda", fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OrderBy("ordem")
+	@OneToMany(mappedBy = "funilVenda", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<FunilVendaEtapa> etapas;
 	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)

@@ -1,23 +1,31 @@
-package br.com.esig.edu.crm.repository;
+package br.com.esig.edu.crm.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import br.com.esig.edu.crm.Paginacao;
-import br.com.esig.edu.crm.comum.dominio.Instituicao;
+import br.com.esig.edu.crm.PaginatedResponse;
 import br.com.esig.edu.crm.dominio.Campanha;
 import br.com.esig.edu.crm.dominio.dto.CampanhaDTO;
+import br.com.esig.edu.crm.filters.CampanhaSpecification;
+import br.com.esig.edu.crm.filters.api.SpecificationsBuilder;
+import br.com.esig.edu.crm.repository.CampanhaRepository;
 import br.com.esig.excecoes.ResourceNotFoundException;
 
 @Service
 public class CampanhaService {
 
 	@Autowired
-	CampanhaRespository campanhaRespository;
+	CampanhaRepository campanhaRespository;
+	
+	@Autowired
+	SpecificationsBuilder specBuilder;
 	
 	@Autowired
 	ModelMapper mapper;
@@ -36,9 +44,19 @@ public class CampanhaService {
 		campanhaRespository.deleteById(campanhaId);
 	}
 	
-	public List<CampanhaDTO> getAll(int instituicaoEnsinoId,  Paginacao paginacao){
-		return campanhaRespository.findAllByInstituicao(new Instituicao(instituicaoEnsinoId), paginacao.toPageable()).stream()
-				.map(it -> mapper.map(it, CampanhaDTO.class)).collect(Collectors.toList());
+	@SuppressWarnings("unchecked")
+	public PaginatedResponse<CampanhaDTO> getAll(int instituicaoEnsinoId,  String search, Paginacao paginacao){
+		
+		specBuilder.with("instituicao", "=", instituicaoEnsinoId);
+		Specification<Campanha> spec = (Specification<Campanha>) specBuilder.build(CampanhaSpecification.class, search);
+		
+		Page<Campanha> page = campanhaRespository.findAll(spec, paginacao.toPageable());
+		Long count = page.getTotalElements();
+		List<CampanhaDTO> retorno = page.stream().map(it -> mapper.map(it, CampanhaDTO.class)).collect(Collectors.toList());
+		
+		paginacao.setData("/campanha", search, count); 
+		
+		return new PaginatedResponse<CampanhaDTO>(retorno, paginacao);		
 	}
 
 	public CampanhaDTO getOne(int campanhaId) {

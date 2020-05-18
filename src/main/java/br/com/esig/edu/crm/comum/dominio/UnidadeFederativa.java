@@ -17,8 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.esig.utils.EqualsUtil;
-import br.com.esig.utils.HashCodeUtil;
 import br.com.esig.validacao.PersistDB;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,5 +50,9 @@ public class UnidadeFederativa implements PersistDB {
 	@ManyToOne
 	@JoinColumn(name = "id_pais")
 	private Pais pais;
+	
+	public UnidadeFederativa(Integer id) {
+		this.id = id;
+	}
 
 }
