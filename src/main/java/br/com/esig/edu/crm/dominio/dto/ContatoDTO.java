@@ -1,5 +1,6 @@
 package br.com.esig.edu.crm.dominio.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,13 +27,13 @@ public class ContatoDTO {
 	private String url;
 	
 	@JsonManagedReference
-	private List<EnderecoEmailDTO> emails;
+	private List<EnderecoEmailDTO> emails = new ArrayList<EnderecoEmailDTO>();
 
 	@JsonManagedReference
-	private List<TelefoneDTO> telefones;
+	private List<TelefoneDTO> telefones = new ArrayList<TelefoneDTO>();
 
 	@JsonManagedReference
-	private List<EnderecoDTO> enderecos;
+	private List<EnderecoDTO> enderecos = new ArrayList<EnderecoDTO>();
 	
 	private Instituicao instituicao;
 	

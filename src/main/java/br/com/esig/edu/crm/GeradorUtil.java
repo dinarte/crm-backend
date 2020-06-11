@@ -2,10 +2,8 @@ package br.com.esig.edu.crm;
 
 import java.util.Arrays;
 
-import br.com.esig.edu.crm.dominio.Lead;
-import br.com.esig.edu.crm.dominio.LeadProduto;
-import br.com.esig.edu.crm.dominio.dto.LeadDTO;
-import br.com.esig.edu.crm.dominio.dto.TimeMembroDTO;
+import br.com.esig.edu.crm.dominio.Agendamento;
+import br.com.esig.edu.crm.dominio.Formulario;
 import br.com.esig.utils.StringUtils;
 
 public class GeradorUtil {
@@ -157,15 +155,19 @@ public class GeradorUtil {
 
 	public static void main(String[] args) {
 		
-		//gerar(TimeDTO.class, COMPONENT_LIST_TS);
-		//gerar(LeadDTO.class, COMPONENT_FORM_TS);
+		gerarDominioTypeScript(Formulario.class);
+		gerar(Formulario.class, SERVICE);
+		gerar(Formulario.class, COMPONENT_LIST_TS);
+		gerar(Formulario.class, COMPONENT_FORM_TS);
 		
-		gerarDominioTypeScript(LeadProduto.class);
-		gerar(LeadProduto.class, COMPONENT_SUB_FORM_TS);
-		gerar(LeadProduto.class, COMPONENT_LIST_TS);
-		gerar(LeadProduto.class, COMPONENT_FORM_TS);
-		gerar(LeadProduto.class, SERVICE);
+	
 		
+		
+		
+		
+		// gerar(Acao.class, COMPONENT_SUB_FORM_TS);
+		// gerar(Acao.class, COMPONENT_LIST_TS);
+		// gerar(Acao.class, COMPONENT_FORM_TS);
 	
 		//gerarDominioTypeScript(TimeDTO.class);
 		//gerarDominioTypeScript(TimeMembroDTO.class);

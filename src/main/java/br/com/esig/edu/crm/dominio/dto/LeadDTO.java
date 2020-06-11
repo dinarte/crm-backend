@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.esig.edu.crm.comum.dto.InstituicaoDTO;
-import br.com.esig.edu.crm.dominio.LeadProduto;
 import br.com.esig.edu.crm.dominio.PrioridadeEnum;
 import br.com.esig.mcore.auth.dto.UsuarioDTO;
 import lombok.Data;
@@ -22,11 +21,13 @@ public class LeadDTO {
 
 	private int id;
 	
-	private ContatoListDTO contato;
+	private ContatoDTO contato;
 	
 	private BigDecimal valor; 
 	
 	private boolean desinteressado;
+	
+	private boolean convertido;
 	
 	private FunilVendaEtapaDTO etapa;
 	
@@ -37,20 +38,24 @@ public class LeadDTO {
 	
 	private MotivoDesinteresseDTO motivoDesinteresse;
 	
-	private FormaCaptacaoDTO formaCapatacao;
+	private FormaCaptacaoDTO formaCaptacao;
 		
 	private InstituicaoDTO instituicao;
 	
 	private UsuarioDTO usuarioCadastro;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date dataCadastro;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 	private Date dataUltimaInteracao;
 	
 	private PrioridadeEnum prioridade;
 	
 	private UsuarioDTO usuarioResponsavel;
-
+	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

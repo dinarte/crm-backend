@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.esig.edu.crm.comum.dominio.Usuario;
+import br.com.esig.edu.crm.comum.service.UsuarioService;
 import br.com.esig.excecoes.AuthenticationException;
+import br.com.esig.excecoes.InfraException;
 import br.com.esig.solis.client.dto.UsuarioAutenticacao;
 
 /**
@@ -22,18 +24,34 @@ public class LogonCrmRestController {
 	@Autowired
 	LogonCrmService logonService;
 	
-	
+	@Autowired
+	UsuarioService userService;
 
 	@PostMapping(value = "/api/auth")
-	public AutenticacaoResponse logar(@RequestBody Credencials credencials) {
+	public br.com.esig.mcore.auth.dto.AutenticacaoResponse logarMCore(@RequestBody Credencials credencials) {
 
-		UsuarioAutenticacao usuario = logonService.getUsuarioByLoginAndSenha(credencials.getLogin(), credencials.getSenha());
+		try {
+			br.com.esig.mcore.auth.dto.AutenticacaoResponse autResponse = logonService.getUsuarioFromMCoreByLoginAndSenha(credencials.getLogin(), credencials.getSenha());
+			Usuario uLocal  = userService.getUsuarioByLogin(credencials.getLogin());
+			autResponse.setJwtToken(logonService.generateJWTMCore(autResponse, uLocal));
+			return autResponse;
+		} catch(InfraException e) {
+			throw new AuthenticationException(e.getMessage());
+		}	
+		
+
+	}
+	
+	@PostMapping(value = "/api/auth/solis")
+	public AutenticacaoResponse logarSolis(Credencials credencials) {
+
+		UsuarioAutenticacao usuario = logonService.getUsuarioFromSolisByLoginAndSenha(credencials.getLogin(), credencials.getSenha());
 		if (usuario == null) {
 			throw new AuthenticationException("Usuário/Senha não encontrados");
 		} else {
 
 			AutenticacaoResponse autResponse = new AutenticacaoResponse((Usuario) usuario.getAutParams().get("usuarioLocal"));
-			autResponse.setJwt(logonService.generateJWT(usuario));
+			autResponse.setJwt(logonService.generateJWTSolis(usuario));
 
 			return autResponse;
 		}

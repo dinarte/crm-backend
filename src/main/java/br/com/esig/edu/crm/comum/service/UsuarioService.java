@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
 
 import br.com.esig.edu.crm.auth.AutenticacaoService;
+import br.com.esig.edu.crm.comum.dominio.Usuario;
 import br.com.esig.edu.crm.comum.dominio.UsuarioRepository;
 import br.com.esig.mcore.auth.dto.UsuarioDTO;
 
@@ -33,6 +34,11 @@ public class UsuarioService {
 				.stream()
 				.map(u -> mapper.map(u, UsuarioDTO.class))
 				.collect(Collectors.toList());
+	}
+
+
+	public Usuario getUsuarioByLogin(String login) {
+		return usuarioRepo.findByLogin(login);
 	}
 
 	

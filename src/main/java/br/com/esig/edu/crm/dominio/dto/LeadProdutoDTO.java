@@ -28,8 +28,12 @@ public class LeadProdutoDTO {
 	
 
 	private UsuarioDTO usuarioCadastro;
-	
 
 	private Date dataCadastro;
+	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 
 }

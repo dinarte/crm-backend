@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 
 import br.com.esig.api.auth.jwt.EnvelopeJwtDTO;
 import br.com.esig.api.auth.jwt.JWTService;
-import br.com.esig.autenticacao.exception.AutenticacaoInvalidaException;
 import br.com.esig.autenticacao.service.interfaces.AutenticacaoProdutoService;
 import br.com.esig.core.config.ProdutoConfig;
 import br.com.esig.core.dominio.ZonaDTO;
 import br.com.esig.edu.crm.comum.dominio.Usuario;
 import br.com.esig.edu.crm.comum.dominio.UsuarioRepository;
-import br.com.esig.solis.client.dto.InstituicaoDTO;
+import br.com.esig.mcore.auth.client.UserAutenticacaoClient;
+import br.com.esig.mcore.auth.dto.AutenticacaoRequest;
 import br.com.esig.solis.client.dto.ProdutoDTO;
 import br.com.esig.solis.client.dto.UsuarioAutenticacao;
 import br.com.esig.web.util.RequestUtils;
@@ -43,12 +43,15 @@ public class LogonCrmService {
 	AutenticacaoProdutoService autenticacaoService;
 	
 	@Autowired
+	UserAutenticacaoClient autenticacaoClient;
+	
+	@Autowired
 	Environment env;
 	
 	@Autowired
 	HttpServletRequest req;
 
-	public UsuarioAutenticacao getUsuarioByLoginAndSenha(String login, String senha) {
+	public UsuarioAutenticacao getUsuarioFromSolisByLoginAndSenha(String login, String senha) {
 		
 		UsuarioAutenticacao autRequest = new UsuarioAutenticacao();
 		
@@ -65,6 +68,21 @@ public class LogonCrmService {
 		userAutenticado.getAutParams().put("usuarioLocal", userLocal);
 		
 		return userAutenticado;
+	}
+	
+	public br.com.esig.mcore.auth.dto.AutenticacaoResponse getUsuarioFromMCoreByLoginAndSenha(String login, String senha) {
+				
+		AutenticacaoRequest mCoreRequest = new AutenticacaoRequest();
+		mCoreRequest.setLogin(login);
+		mCoreRequest.setPassword(senha);
+		mCoreRequest.setApp(produtoConfig.getAppCodigo());
+
+		br.com.esig.mcore.auth.dto.AutenticacaoResponse responseMCore = autenticacaoClient.autenticar(mCoreRequest);
+
+		log.info("Iniciando autenticação para o usuário " + login + ", produto " + responseMCore.getApp());
+		
+		
+		return responseMCore;
 	}
 	
 	
@@ -87,7 +105,7 @@ public class LogonCrmService {
 	}
 	
 
-	public String generateJWT(UsuarioAutenticacao user ) {
+	public String generateJWTSolis(UsuarioAutenticacao user ) {
 		
 		Usuario uLocal = (Usuario) user.getAutParams().get("usuarioLocal"); 
 		
@@ -105,6 +123,25 @@ public class LogonCrmService {
 
 		return jwtService.generateJWT(envelope);
 	}
+	
+	
+	public String generateJWTMCore(br.com.esig.mcore.auth.dto.AutenticacaoResponse autResponse, Usuario uLocal) {
+		
+		EnvelopeJwtDTO envelope = new EnvelopeJwtDTO();
+		envelope.setCodigoApp(produtoConfig.getAppCodigo());
+		envelope.setData(new Date());
+		envelope.setEmail(uLocal.getLogin());
+		envelope.setLogin(uLocal.getLogin());
+		envelope.setIdUsuario(uLocal.getId());
+		envelope.setId(uLocal.getId());
+		envelope.setInstituicaoId(12980);
+		
+		envelope.setMetaDados( new HashMap<String,Object>() );
+		envelope.getMetaDados().put("usuarioLocal", uLocal);
+		envelope.getMetaDados().put("mCoreAuth", autResponse);
+		return jwtService.generateJWT(envelope);
+	}
+	
 
 	public String toMD5(String password) {
 
@@ -117,5 +154,9 @@ public class LogonCrmService {
 		m.update(password.getBytes(), 0, password.length());
 		return new BigInteger(1, m.digest()).toString(16);
 	}
+
+	
+
+	
 
 }

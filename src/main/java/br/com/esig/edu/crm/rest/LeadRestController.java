@@ -119,7 +119,7 @@ public class LeadRestController {
 	
 	
 
-	@RequestMapping(method = RequestMethod.PUT, value = {"","/mover/{leadId}/{etapaOrigemId}/{etapaDestinoId}"})
+	@RequestMapping(method = RequestMethod.PUT, value = "/mover/{leadId}/{etapaOrigemId}/{etapaDestinoId}")
 	public ResponseEntity<LeadDTO> mover(@PathVariable("leadId") Integer leadId, 
 			@PathVariable("etapaOrigemId") Integer etapaOrigemId, @PathVariable("etapaDestinoId") Integer etapaDestinoId) {
 		

@@ -15,10 +15,13 @@ import org.springframework.stereotype.Service;
 import br.com.esig.edu.crm.Paginacao;
 import br.com.esig.edu.crm.PaginatedResponse;
 import br.com.esig.edu.crm.auth.AutenticacaoService;
+import br.com.esig.edu.crm.dominio.Acao;
+import br.com.esig.edu.crm.dominio.AcaoCanal;
 import br.com.esig.edu.crm.dominio.Lead;
 import br.com.esig.edu.crm.dominio.dto.LeadDTO;
 import br.com.esig.edu.crm.filters.LeadSpecification;
 import br.com.esig.edu.crm.filters.api.SpecificationsBuilder;
+import br.com.esig.edu.crm.repository.FunilVendaEtapaRepository;
 import br.com.esig.edu.crm.repository.LeadRepository;
 import br.com.esig.excecoes.ResourceNotFoundException;
 import br.com.esig.validacao.ValidationException;
@@ -28,6 +31,12 @@ public class LeadService {
 
 	@Autowired
 	LeadRepository leadRespository;
+	
+	@Autowired
+	AcaoService acaoService;
+	
+	@Autowired
+	FunilVendaEtapaRepository etapaRepo;
 	
 	@Autowired
 	SpecificationsBuilder specBuilder;
@@ -63,6 +72,7 @@ public class LeadService {
 	@Transactional
 	public LeadDTO update(Lead lead) {
 		throwIfNotExists(lead.getId());
+		lead.getProdutos().forEach(lp -> lp.setLead(lead));
 		return mapper.map(leadRespository.save(lead), LeadDTO.class);
 	}
 	
@@ -172,6 +182,17 @@ public class LeadService {
 		lead.getEtapa().setId(etapaDestinoId);
 		
 		leadRespository.save(lead);
+		
+		Acao a = new Acao();
+		a.setLead(lead);
+		a.setResumo("Movimentação no Funil");
+		a.setDescricao("O Lead foi movido para " + etapaRepo.findById(etapaDestinoId).get().getNome());
+		a.setDataOperacao(new Date());
+		a.setUsuarioOperacao(lead.getUsuarioCadastro());
+		a.setTipo(Acao.INTRENO);
+		a.setCanal(AcaoCanal.QUARK_CRM);
+		
+		acaoService.create(a);
 		
 		return null;
 	}

@@ -24,7 +24,6 @@ public abstract class GenericSpecification<T> implements Specification<T> {
 
 	private Predicate getGernericSpecification(Root<T> root, CriteriaBuilder builder) {
 		
-		
 		if (criteria.getOperation().equalsIgnoreCase(">")) {
             return builder.greaterThanOrEqualTo(
               root.<String> get(criteria.getKey()), criteria.getValue().toString());
@@ -36,7 +35,7 @@ public abstract class GenericSpecification<T> implements Specification<T> {
         else if (criteria.getOperation().equalsIgnoreCase(":")) {
             if (root.get(criteria.getKey()).getJavaType() == String.class) {
                 return builder.like(
-                  root.<String>get(criteria.getKey()), "%" + criteria.getValue() + "%");
+                		builder.upper(root.<String>get(criteria.getKey())), "%" + criteria.getValue().toString().toUpperCase() + "%", 'ç');
             } else {
                 return builder.equal(root.get(criteria.getKey()), criteria.getValue());
             }

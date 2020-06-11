@@ -31,7 +31,9 @@ public interface LeadRepository extends CrudRepository<Lead, Integer>, JpaSpecif
 					" and (e.id_funil_venda_etapa_tipo = :tipoEtapaId or 0 = :tipoEtapaId) \r\n" + 
 					" and (l.id_campanha = :campanhaId or 0 = :campanhaId) \r\n" + 
 					" and (lp.id_produto = :produtoId or 0 = :produtoId)\r\n" + 
-					" and (tm.id_time = :timeId or 0 = :timeId)",
+					" and (tm.id_time = :timeId or 0 = :timeId) " +
+					" and not convertido " +
+					" and not desinteressado ",
 				nativeQuery = true	
 			)	
 	List<Lead> findAllByEtapaTtipoEtapaTimeCampanhaProduto(

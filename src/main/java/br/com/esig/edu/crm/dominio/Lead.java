@@ -52,13 +52,15 @@ public class Lead {
 	@Column(name = "id_lead", unique = true, nullable = false, insertable = true, updatable = true)
 	private int id;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_contato", unique = false, nullable = false)
 	private Contato contato;
 	
 	private BigDecimal valor; 
 	
 	private boolean desinteressado;
+	
+	private boolean convertido;
 	
 	@ManyToOne(cascade = {}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_etapa", unique = false, nullable = true)
@@ -104,5 +106,9 @@ public class Lead {
 	@CriadoEm
 	@Column(name="data_ultima_interacao")
 	private Date dataUltimaInteracao;
+	
+	public Lead(int id) {
+		this.id = id;
+	}
 
 }
